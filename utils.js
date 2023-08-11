@@ -17,7 +17,6 @@ function getRandomDuration() {
 }
 
 
-
 module.exports = {
   getRandomLikesCount,
   getRandomViewsCount,
