@@ -10,13 +10,15 @@ const { v4: uuidv4 } = require('uuid');
 
 // get videos request
 router.route('/easy')
+
   .get((req, res) => {
-  fs.readFile(madGabsEasyPath, (err, data) => {
-    try {
-      const madGabsEasyPath = JSON.parse(data);
-      res.json(madGabsEasyPath);
-      
-    } catch (error) {
+    fs.readFile(madGabsEasyPath, (err, data) => {
+      try {
+        const madGabsEasyData = JSON.parse(data);
+        res.json(madGabsEasyData);
+        
+        console.log("easy")
+      } catch (error) {
       console.error(error);
     }
   })
@@ -25,6 +27,7 @@ router.route('/easy')
 // get videos request
 router.route('/medium')
   .get((req, res) => {
+    console.log("medium")
   fs.readFile(madGabsMediumPath, (err, data) => {
     try {
       const madGabsMediumPath = JSON.parse(data);
@@ -39,6 +42,7 @@ router.route('/medium')
 // get videos request
 router.route('/hard')
   .get((req, res) => {
+    console.log("hard")
   fs.readFile(madGabsHardPath, (err, data) => {
     try {
       const madGabsHardPath = JSON.parse(data);
@@ -54,60 +58,60 @@ router.route('/hard')
 
 // 
 
-router.route('/:id')
+// router.route('/:id')
 // get video details
-  .get((req, res) => {
+  // .get((req, res) => {
   
-  const requestedId = req.params.id; 
+//   const requestedId = req.params.id; 
   
-  fs.readFile(videosFilePath, (err, data) => {
+//   fs.readFile(videosFilePath, (err, data) => {
 
-      const requestedVideo = JSON.parse(data).find(video => video.id === requestedId);
+//       const requestedVideo = JSON.parse(data).find(video => video.id === requestedId);
       
-    if (!requestedVideo) {
-      return res.status(404).json({ error: 'Video not found' });
-    }
-    res.json(requestedVideo);
-  })
-  // post comments on a video
-})
-router.post('/:id/comments', (req, res) => {
-  const requestedId = req.params.id; 
-  const newComment = req.body;
+//     if (!requestedVideo) {
+//       return res.status(404).json({ error: 'Video not found' });
+//     }
+//     res.json(requestedVideo);
+//   })
+//   // post comments on a video
+// })
+// router.post('/:id/comments', (req, res) => {
+//   const requestedId = req.params.id; 
+//   const newComment = req.body;
 
   
-  fs.readFile(videosFilePath, (err, data) => {
+//   fs.readFile(videosFilePath, (err, data) => {
        
-    try {
-      const videos = JSON.parse(data);
+//     try {
+//       const videos = JSON.parse(data);
 
-      const requestedVideo = videos.find(video => video.id === requestedId);
+//       const requestedVideo = videos.find(video => video.id === requestedId);
 
-      if (!requestedVideo) {
-        return res.status(404).json({ error: 'Video not found' });
-      }
+//       if (!requestedVideo) {
+//         return res.status(404).json({ error: 'Video not found' });
+//       }
 
-      if (!requestedVideo.comments) {
-        requestedVideo.comments = [];
-      }
-      requestedVideo.comments.push(newComment);
+//       if (!requestedVideo.comments) {
+//         requestedVideo.comments = [];
+//       }
+//       requestedVideo.comments.push(newComment);
 
-      // Write the updated data back to the JSON file
-      fs.writeFile(videosFilePath, JSON.stringify(videos, null, 2), err => {
-        if (err) {
-          console.error('Error writing videos.json:', err);
-          return res.status(500).json({ error: 'Internal server error' });
-        }
+//       // Write the updated data back to the JSON file
+//       fs.writeFile(videosFilePath, JSON.stringify(videos, null, 2), err => {
+//         if (err) {
+//           console.error('Error writing videos.json:', err);
+//           return res.status(500).json({ error: 'Internal server error' });
+//         }
 
-        res.json({ message: 'Comment added successfully', video: requestedVideo });
-      });
+//         res.json({ message: 'Comment added successfully', video: requestedVideo });
+//       });
 
-    } catch (parseError) {
-      console.error('Error parsing JSON:', parseError);
-      res.status(500).json({ error: 'Error parsing JSON' });
-    }
-  });
-});
+//     } catch (parseError) {
+//       console.error('Error parsing JSON:', parseError);
+//       res.status(500).json({ error: 'Error parsing JSON' });
+//     }
+//   });
+// });
 
 
 

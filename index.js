@@ -5,6 +5,7 @@ const path = require('path');
 const router = express.Router();
 const routes = require("./routes/gabs").router; 
 
+// console.log("index")
 
 const app = express();
  
@@ -24,14 +25,13 @@ app.use(express.static('./assets'));
 app.use(express.json());
 
 
-// path to videos.json file
 // const videosFilePath = './data/videos.json';
 const madGabsEasyPath = './data/madGabsEasy.json';
 
 
 // Routes:
 // get videos request for /videos
-app.use('/gabs', routes);
+app.use('/', routes);
 
 const port = process.env.PORT || 8088;
 
