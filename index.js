@@ -2,7 +2,8 @@ const cors = require('cors');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const routes = require("./routes/gabs").router; 
+// const routes = require("./routes/gabs").router; 
+const routes = require("./routes/gabs")
 
 const app = express();
  

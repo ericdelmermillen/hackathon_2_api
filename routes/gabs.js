@@ -14,7 +14,6 @@ router.route('/easy')
         const madGabsEasyData = JSON.parse(data);
         res.json(madGabsEasyData);
         
-        console.log("easy")
       } catch (error) {
       console.error(error);
     }
@@ -50,6 +49,5 @@ router.route('/hard')
 });
 
 
-module.exports = {
-  router
-}
+module.exports = router;
+
